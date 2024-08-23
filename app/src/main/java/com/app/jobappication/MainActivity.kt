@@ -3,7 +3,9 @@ package com.app.jobappication
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -13,8 +15,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavType
@@ -22,6 +30,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import coil.compose.AsyncImage
 import com.app.jobappication.screens.jobMainScreen
 import com.app.jobappication.ui.theme.JobAppicationTheme
 import com.app.jobappication.viewmodel.JobViewModel
@@ -64,21 +73,57 @@ fun jobApp() {
 @Composable
 fun WelcomeScreen(navController: NavController) {
     Scaffold(
-
         content = {
-            Column(
-                modifier = Modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                Text(
-                    text = "Welcome to the Job Application!",
-                    modifier = Modifier.padding(16.dp)
-                )
-                Button(onClick = { navController.navigate("jobs") }) {
-                    Text("View Jobs")
+            AsyncImage(model = R.drawable.background_welcome,
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier.fillMaxSize())
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colorStops = arrayOf(
+                                0.0f to Color(0xFF86CDFF).copy(alpha = 0.8f), // 0%
+                                0.06f to Color(0xFF7EC3F4).copy(alpha = 0.8f), // 6%
+                                0.13f to Color(0xFF75B8E9).copy(alpha = 0.8f), // 13%
+                                0.25f to Color(0xFF64A4D2).copy(alpha = 0.8f), // 25%
+                                0.5f to Color(0xFF437CA5).copy(alpha = 0.8f),  // 50%
+                                1.0f to Color(0xFF002C4C).copy(alpha = 1f)   // 100%
+                            )
+                        )
+                    )
+            )
+            {
+
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Box {
+                        Text(
+                            text = "Job Finder",
+                            modifier = Modifier.padding(horizontal = 16.dp),
+                            color = Color(0xFF022E4D), // Correct color setup
+                            fontSize = 50.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Text(
+                            text = "Caught Your Chance!",
+                            modifier = Modifier.padding(start = 110.dp,top=55.dp),
+                            color = Color(0xFF022E4D), // Correct color setup
+                            fontSize = 16.sp
+                        )
+                    }
+
+
+                    Button(modifier = Modifier.padding(top=180.dp),onClick = { navController.navigate("jobs") }) {
+                        Text("Explore >>")
+                    }
                 }
             }
+
         }
     )
 }

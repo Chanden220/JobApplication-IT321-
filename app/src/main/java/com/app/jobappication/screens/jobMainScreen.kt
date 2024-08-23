@@ -46,31 +46,6 @@ fun jobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
                     }
                 }
             )
-        },
-        bottomBar = {
-            BottomAppBar {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(16.dp),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    IconButton(
-                        onClick = {  if (vm.page > 1) { vm.page -= 1; vm.fetchJobs() } },
-                        enabled = vm.prevPageUrl != null
-                    ) {
-                        Icon(Icons.Default.ArrowBack, contentDescription = "Previous Page")
-                    }
-                    Text("${vm.page}", fontSize = 16.sp)
-                    IconButton(
-                        onClick = { vm.fetchNextPage() },
-                        enabled = vm.nextPageUrl != null
-                    ) {
-                        Icon(Icons.Default.ArrowForward, contentDescription = "Next Page")
-                    }
-                }
-            }
         }
     ) { innerPadding ->
         Box(
@@ -86,6 +61,19 @@ fun jobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
                 verticalArrangement = Arrangement.SpaceBetween
             ) {
                 jobBody(vm, navController)
+                IconButton(
+                    onClick = {  if (vm.page > 1) { vm.page -= 1; vm.fetchJobs() } },
+                    enabled = vm.prevPageUrl != null
+                ) {
+                    Icon(Icons.Default.ArrowBack, contentDescription = "Previous Page")
+                }
+                Text("${vm.page}", fontSize = 16.sp)
+                IconButton(
+                    onClick = { vm.fetchNextPage() },
+                    enabled = vm.nextPageUrl != null
+                ) {
+                    Icon(Icons.Default.ArrowForward, contentDescription = "Next Page")
+                }
             }
         }
     }

@@ -125,7 +125,7 @@ fun Nav(content: @Composable (PaddingValues) -> Unit) {
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .verticalScroll(scrollState)
+                //.verticalScroll(scrollState)
         ) {
             content(innerPadding)
         }

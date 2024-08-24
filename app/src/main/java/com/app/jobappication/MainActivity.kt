@@ -40,8 +40,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JobAppicationTheme {
-//                JobApp()
-                MyScreen()
+               JobApp()
+                //MyScreen()
             }
         }
     }
@@ -52,7 +52,7 @@ fun JobApp() {
     val navController = rememberNavController()
     val vm: JobViewModel = viewModel() // Use viewModel() to obtain an instance of JobViewModel
 
-    NavHost(navController = navController, startDestination = "welcome") {
+    NavHost(navController = navController, startDestination = "jobs") {
         composable("welcome") {
             WelcomeScreen(navController)
         }

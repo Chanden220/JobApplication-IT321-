@@ -9,9 +9,13 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowForwardIos
+import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Refresh
+import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -38,24 +42,18 @@ import kotlinx.coroutines.launch
 fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) {
     // Launch the job fetching on component load
     LaunchedEffect(Unit) { vm.fetchJobs() }
-
-    Nav{ innerPadding ->
-        Box(
+    Nav { paddingValues ->
+        Column(
             modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize(),
-            contentAlignment = Alignment.Center
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .background(MaterialTheme.colorScheme.surface),
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                JobBody(vm, navController)
-            }
+                .padding(paddingValues)
+                .fillMaxSize()
+                .background(Color(0xFFF1F1F1))
+        ){
+        JobBody(vm, navController)
         }
     }
+
+
 }
 
 @Composable
@@ -72,8 +70,144 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
         Column(modifier = Modifier.fillMaxSize()) {
             // Carousel Section using LazyRow with auto-scrolling
             AutoScrollingCarousel(jobs = vm.jobs)
+            Row(modifier = Modifier
+                .padding(9.dp)
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom){
+                Row {
+                    Icon(Icons.Default.Category, contentDescription = "Category")
+                    Text(
+                        text = "Category", fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp
+                    )
+                }
+                Icon(Icons.Default.ArrowForwardIos, contentDescription = "CategoryAll")
+            }
+            Row(modifier = Modifier
+                .padding(9.dp)
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom){
+                Box(
+                    modifier = Modifier
+                        .width(185.dp)
+                        .shadow(4.dp, RoundedCornerShape(8.dp))
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Icon(
+                            Icons.Default.LocationOn,
+                            contentDescription = "Location"
+                        )
+                        Text(
+                            text = "Location",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
 
-            // Job List Section using LazyColumn
+                        )
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .width(185.dp)
+                        .shadow(4.dp, RoundedCornerShape(8.dp))
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Icon(
+                            Icons.Default.Wifi,
+                            contentDescription = "WorkMode"
+                        )
+                        Text(
+                            text = "Work Type",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+
+                            )
+                    }
+                }
+
+            }
+            Row(modifier = Modifier
+                .padding(9.dp)
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom){
+                Box(
+                    modifier = Modifier
+                        .width(185.dp)
+                        .shadow(4.dp, RoundedCornerShape(8.dp))
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Icon(
+                            Icons.Default.LocationOn,
+                            contentDescription = "Location"
+                        )
+                        Text(
+                            text = "Location",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+
+                            )
+                    }
+                }
+                Box(
+                    modifier = Modifier
+                        .width(185.dp)
+                        .shadow(4.dp, RoundedCornerShape(8.dp))
+                        .background(
+                            color = Color.White,
+                            shape = RoundedCornerShape(8.dp)
+                        )
+                        .padding(8.dp)
+                ) {
+                    Row(
+                        modifier = Modifier.padding(8.dp)
+                    ) {
+                        Icon(
+                            Icons.Default.Wifi,
+                            contentDescription = "WorkMode"
+                        )
+                        Text(
+                            text = "Work Mode",
+                            fontWeight = FontWeight.Bold,
+                            fontSize = 14.sp,
+
+                            )
+                    }
+                }
+
+            }
+
+            Row(modifier = Modifier
+                .padding(9.dp)
+                .fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.Bottom){
+                Text(text = "New",fontWeight = FontWeight.Bold,
+                    fontSize = 16.sp)
+                Icon(Icons.Default.ArrowForwardIos, contentDescription = "NewwAll")
+            }
             LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(vm.jobs.take(10)) { job ->
                     JobItemGrid(job, navController,vm)

@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JobAppicationTheme {
-                //JobApp()
+//                JobApp()
                 MyScreen()
             }
         }

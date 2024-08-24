@@ -94,7 +94,7 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                         .width(185.dp)
                         .shadow(4.dp, RoundedCornerShape(8.dp))
                         .background(
-                            color = Color.White,
+                            color = Color(0xFF022E4D),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
@@ -119,7 +119,7 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                         .width(185.dp)
                         .shadow(4.dp, RoundedCornerShape(8.dp))
                         .background(
-                            color = Color.White,
+                            color = Color(0xFF022E4D),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
@@ -151,7 +151,7 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                         .width(185.dp)
                         .shadow(4.dp, RoundedCornerShape(8.dp))
                         .background(
-                            color = Color.White,
+                            color = Color(0xFF022E4D),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
@@ -176,7 +176,7 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                         .width(185.dp)
                         .shadow(4.dp, RoundedCornerShape(8.dp))
                         .background(
-                            color = Color.White,
+                            color = Color(0xFF022E4D),
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)

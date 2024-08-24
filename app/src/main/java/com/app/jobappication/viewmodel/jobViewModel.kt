@@ -2,17 +2,12 @@ package com.app.jobappication.viewmodel
 
 import android.net.Uri
 import android.net.http.HttpException
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
+import androidx.compose.runtime.*
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.app.jobappication.model.JobModel
 import com.app.jobappication.model.Results
 import com.app.jobappication.services.JobAPIService
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.IOException
 
@@ -21,6 +16,10 @@ class JobViewModel : ViewModel() {
     // Use MutableStateFlow to manage state
     private val _jobs = mutableStateListOf<Results>()
     val jobs: List<Results> = _jobs
+
+    // List to store favorite jobs
+    private val _favoriteJobs = mutableStateListOf<Results>()
+    val favoriteJobs: List<Results> = _favoriteJobs
 
     var nextPageUrl: String? by mutableStateOf("")
     var prevPageUrl: String? by mutableStateOf("")
@@ -89,5 +88,22 @@ class JobViewModel : ViewModel() {
 
     private fun extractPageNumber(url: String): Int? {
         return Uri.parse(url).getQueryParameter("page")?.toInt()
+    }
+
+    // Function to add a job to favorites
+    fun addJobToFavorites(job: Results) {
+        if (!_favoriteJobs.contains(job)) {
+            _favoriteJobs.add(job)
+        }
+    }
+
+    // Function to remove a job from favorites
+    fun removeJobFromFavorites(job: Results) {
+        _favoriteJobs.remove(job)
+    }
+
+    // Function to check if a job is a favorite
+    fun isJobFavorite(job: Results): Boolean {
+        return _favoriteJobs.contains(job)
     }
 }

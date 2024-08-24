@@ -31,7 +31,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.compose.AsyncImage
-import com.app.jobappication.screens.jobMainScreen
+import com.app.jobappication.screens.JobMainScreen
 import com.app.jobappication.ui.theme.JobAppicationTheme
 import com.app.jobappication.viewmodel.JobViewModel
 
@@ -65,7 +65,7 @@ fun jobApp() {
             JobDetailScreen(jobId = jobId, navController = navController)
         }
         composable("jobs") {
-            jobMainScreen(vm, navController)
+            JobMainScreen(vm, navController)
         }
     }
 }
@@ -84,10 +84,10 @@ fun WelcomeScreen(navController: NavController) {
                     .background(
                         brush = Brush.verticalGradient(
                             colorStops = arrayOf(
-                                0.0f to Color(0xFF86CDFF).copy(alpha = 0.8f), // 0%
-                                0.06f to Color(0xFF7EC3F4).copy(alpha = 0.8f), // 6%
-                                0.13f to Color(0xFF75B8E9).copy(alpha = 0.8f), // 13%
-                                0.25f to Color(0xFF64A4D2).copy(alpha = 0.8f), // 25%
+                                0.0f to Color(0xFF86CDFF).copy(alpha = 0.1f), // 0%
+                                0.06f to Color(0xFF7EC3F4).copy(alpha = 0.1f), // 6%
+                                0.13f to Color(0xFF75B8E9).copy(alpha = 0.4f), // 13%
+                                0.25f to Color(0xFF64A4D2).copy(alpha = 0.4f), // 25%
                                 0.5f to Color(0xFF437CA5).copy(alpha = 0.8f),  // 50%
                                 1.0f to Color(0xFF002C4C).copy(alpha = 1f)   // 100%
                             )

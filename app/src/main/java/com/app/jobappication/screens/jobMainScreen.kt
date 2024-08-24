@@ -39,21 +39,7 @@ fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
     // Launch the job fetching on component load
     LaunchedEffect(Unit) { vm.fetchJobs() }
 
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Good Afternoon!", color = MaterialTheme.colorScheme.primary) },
-                actions = {
-                    IconButton(onClick = { vm.fetchJobs() }) {
-                        Icon(Icons.Default.Refresh, contentDescription = "Refresh", tint = MaterialTheme.colorScheme.primary)
-                    }
-                    IconButton(onClick = { /* Handle sorting or other actions */ }) {
-                        Icon(Icons.Default.Menu, contentDescription = "Menu", tint = MaterialTheme.colorScheme.primary)
-                    }
-                }
-            )
-        }
-    ) { innerPadding ->
+    Nav{ innerPadding ->
         Box(
             modifier = Modifier
                 .padding(innerPadding)

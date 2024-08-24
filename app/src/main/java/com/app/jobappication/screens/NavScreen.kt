@@ -30,6 +30,9 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import kotlinx.coroutines.launch
 import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
@@ -156,7 +159,7 @@ fun DrawerContent(navController: NavController) {
                 .border(1.dp, Color.Gray, shape = RectangleShape)
                 .padding(16.dp)
         ) {
-            Text("Username", style = MaterialTheme.typography.h6)
+            Text("Username", style = MaterialTheme.typography.bodySmall)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -168,8 +171,8 @@ fun DrawerContent(navController: NavController) {
                 .padding(start = 16.dp, end = 16.dp)
                 .background(Color.Transparent)
                 .then(Modifier.shadow(0.dp)), // Removes any shadow
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
-            elevation = ButtonDefaults.elevation(0.dp), // Ensures no elevation
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+            elevation = ButtonDefaults.buttonElevation(0.dp), // Ensures no elevation
             contentPadding = PaddingValues(0.dp),
             interactionSource = remember { MutableInteractionSource() } // Removes ripple effect
         ) {
@@ -183,8 +186,8 @@ fun DrawerContent(navController: NavController) {
                 .padding(start = 16.dp, end = 16.dp)
                 .background(Color.Transparent)
                 .then(Modifier.shadow(0.dp)),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
-            elevation = ButtonDefaults.elevation(0.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+            elevation = ButtonDefaults.buttonElevation(0.dp),
             contentPadding = PaddingValues(0.dp),
             interactionSource = remember { MutableInteractionSource() }
         ) {
@@ -198,8 +201,8 @@ fun DrawerContent(navController: NavController) {
                 .padding(start = 16.dp, end = 16.dp)
                 .background(Color.Transparent)
                 .then(Modifier.shadow(0.dp)),
-            colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent),
-            elevation = ButtonDefaults.elevation(0.dp),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+            elevation = ButtonDefaults.buttonElevation(0.dp),
             contentPadding = PaddingValues(0.dp),
             interactionSource = remember { MutableInteractionSource() }
         ) {

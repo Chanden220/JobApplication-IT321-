@@ -54,6 +54,7 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.11.0")
 
     // Core libraries
+    implementation("androidx.compose.material:material:1.4.0") // Use the latest stable version
     implementation("androidx.core:core-ktx:1.10.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.1")
     implementation("androidx.activity:activity-compose:1.7.0")

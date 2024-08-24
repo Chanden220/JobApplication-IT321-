@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
@@ -46,7 +48,12 @@ fun MyScreen() {
                 .fillMaxSize()
                 .background(Color.White)
         ) {
-            Text(getGreeting(), modifier = Modifier.padding(16.dp))
+            DetailScreen(
+                imageUrl = "https://c4.wallpaperflare.com/wallpaper/685/180/1019/work-is-worship-wallpaper-preview.jpg",
+                title = "UX/UI Developer",
+                date = "ABC Company | August 24, 2024",
+                description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it."
+            )
         }
     }
 }
@@ -57,6 +64,7 @@ fun Nav(content: @Composable (PaddingValues) -> Unit) {
     val navController = rememberNavController()
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
+    val scrollState = rememberScrollState()
 
     Scaffold(
         scaffoldState = scaffoldState,
@@ -102,7 +110,13 @@ fun Nav(content: @Composable (PaddingValues) -> Unit) {
             DrawerContent(navController = navController)
         }
     ) { innerPadding ->
-        content(innerPadding)
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .verticalScroll(scrollState)
+        ) {
+            content(innerPadding)
+        }
     }
 }
 

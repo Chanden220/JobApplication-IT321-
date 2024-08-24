@@ -110,13 +110,12 @@ fun Nav(content: @Composable (PaddingValues) -> Unit) {
             DrawerContent(navController = navController)
         }
     ) { innerPadding ->
-        // Wrap the content in a vertical scrollable container
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .verticalScroll(scrollState) // Enable scrolling
+                .verticalScroll(scrollState)
         ) {
-            content(innerPadding) // Pass default PaddingValues to content
+            content(innerPadding)
         }
     }
 }

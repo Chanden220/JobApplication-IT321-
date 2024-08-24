@@ -1,5 +1,6 @@
 package com.app.jobappication
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,8 +20,6 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -32,6 +31,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.compose.AsyncImage
 import com.app.jobappication.screens.JobMainScreen
+import com.app.jobappication.screens.MyScreen
 import com.app.jobappication.ui.theme.JobAppicationTheme
 import com.app.jobappication.viewmodel.JobViewModel
 
@@ -40,14 +40,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JobAppicationTheme {
-                jobApp()
+//                JobApp()
+                MyScreen()
             }
         }
     }
 }
 
 @Composable
-fun jobApp() {
+fun JobApp() {
     val navController = rememberNavController()
     val vm: JobViewModel = viewModel() // Use viewModel() to obtain an instance of JobViewModel
 
@@ -70,6 +71,7 @@ fun jobApp() {
     }
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun WelcomeScreen(navController: NavController) {
     Scaffold(
@@ -128,6 +130,7 @@ fun WelcomeScreen(navController: NavController) {
     )
 }
 
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun JobDetailScreen(jobId: String?, navController: NavController) {
     Scaffold(

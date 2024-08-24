@@ -40,8 +40,14 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             JobAppicationTheme {
-//                JobApp()
-                MyScreen()
+                Box(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .background(Color(0xFFF1F1F1))
+                ) {
+                    // JobApp()
+                    MyScreen()
+                }
             }
         }
     }

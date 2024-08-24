@@ -92,4 +92,5 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4")
     implementation("androidx.compose.material:material:1.5.0")
     implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("com.github.bumptech.glide:glide:4.13.2")
 }

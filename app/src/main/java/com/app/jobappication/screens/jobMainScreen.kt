@@ -16,11 +16,16 @@ import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Wifi
+import androidx.compose.material.icons.filled.Work
 import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -58,6 +63,8 @@ fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
 
 @Composable
 fun JobBody(vm: JobViewModel, navController: NavController) {
+    var expandedCategory: Boolean by remember { mutableStateOf(false) }
+    var expandedLoactionSearch: Boolean by remember { mutableStateOf(false) }
     if (vm.isLoading) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
@@ -82,7 +89,7 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                         fontSize = 16.sp
                     )
                 }
-                Icon(Icons.Default.ArrowForwardIos, contentDescription = "CategoryAll")
+                Icon(Icons.Default.ArrowForwardIos, contentDescription = "CategoryAll",modifier = Modifier.clickable { navController.navigate("bycategory") })
             }
             Row(modifier = Modifier
                 .padding(9.dp)
@@ -98,19 +105,23 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
+
                 ) {
                     Row(
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
+                        verticalAlignment = Alignment.Bottom,
                     ) {
                         Icon(
                             Icons.Default.LocationOn,
-                            contentDescription = "Location"
+                            contentDescription = "Location",
+                            tint = Color(0xFFFFA500)
                         )
                         Text(
                             text = "Location",
                             fontWeight = FontWeight.Bold,
+                            color = Color.White,
                             fontSize = 14.sp,
-
+                            modifier = Modifier.padding(start = 8.dp)
                         )
                     }
                 }
@@ -123,23 +134,26 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
+
                 ) {
                     Row(
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
+                        verticalAlignment = Alignment.Bottom,
                     ) {
                         Icon(
-                            Icons.Default.Wifi,
-                            contentDescription = "WorkMode"
+                            Icons.Default.Work,
+                            contentDescription = "WorkMode",
+                            tint = Color(0xFFFFA500)
                         )
                         Text(
                             text = "Work Type",
                             fontWeight = FontWeight.Bold,
                             fontSize = 14.sp,
-
-                            )
+                            color = Color.White,
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
                     }
                 }
-
             }
             Row(modifier = Modifier
                 .padding(9.dp)
@@ -155,45 +169,24 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
-                ) {
-                    Row(
-                        modifier = Modifier.padding(8.dp)
-                    ) {
-                        Icon(
-                            Icons.Default.LocationOn,
-                            contentDescription = "Location"
-                        )
-                        Text(
-                            text = "Location",
-                            fontWeight = FontWeight.Bold,
-                            fontSize = 14.sp,
 
-                            )
-                    }
-                }
-                Box(
-                    modifier = Modifier
-                        .width(185.dp)
-                        .shadow(4.dp, RoundedCornerShape(8.dp))
-                        .background(
-                            color = Color(0xFF022E4D),
-                            shape = RoundedCornerShape(8.dp)
-                        )
-                        .padding(8.dp)
                 ) {
                     Row(
-                        modifier = Modifier.padding(8.dp)
+                        modifier = Modifier.padding(8.dp),
+                        verticalAlignment = Alignment.Bottom,
                     ) {
                         Icon(
                             Icons.Default.Wifi,
-                            contentDescription = "WorkMode"
+                            contentDescription = "Remote",
+                            tint = Color(0xFFFFA500)
                         )
                         Text(
-                            text = "Work Mode",
+                            text = "Remote",
                             fontWeight = FontWeight.Bold,
+                            color = Color.White,
                             fontSize = 14.sp,
-
-                            )
+                            modifier = Modifier.padding(start = 8.dp)
+                        )
                     }
                 }
 
@@ -370,11 +363,16 @@ fun JobItemGrid(job: Results, navController: NavController, jobViewModel: JobVie
                                 } else {
                                     jobViewModel.addJobToFavorites(job)
                                 }
-                            }
+                            },
+                            modifier = Modifier
+                                .padding(vertical = 8.dp)
+                                .align(Alignment.Bottom)
                         ) {
                             Icon(
                                 imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                                contentDescription = "Favorite"
+                                contentDescription = "Favorite",
+                                modifier = Modifier.size(24.dp),
+                                tint = Color.Red
                             )
                         }
                     }

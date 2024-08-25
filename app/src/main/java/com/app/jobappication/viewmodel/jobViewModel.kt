@@ -22,14 +22,19 @@ class JobViewModel : ViewModel() {
     val favoriteJobs: List<Results> = _favoriteJobs
 
     var nextPageUrl: String? by mutableStateOf("")
+
     var prevPageUrl: String? by mutableStateOf("")
+    var employeeType: String? by mutableStateOf("")
+    var locationSearch: String? by mutableStateOf("")
+    var search: String? by mutableStateOf("")
+    var remote: Boolean? by mutableStateOf(null)
     var errorMessage: String by mutableStateOf("")
     var isLoading: Boolean by mutableStateOf(false)
     var page by mutableStateOf(1)
     private val jobApiService = JobAPIService.getInstance()
 
     fun fetchJobs(
-        search: String = "",
+        search: String? = null,
         source: String? = null,
         location: String? = null,
         remote: Boolean? = null,
@@ -40,6 +45,8 @@ class JobViewModel : ViewModel() {
         viewModelScope.launch {
             isLoading = true
             try {
+                println("fetchJobs parameters: search=$search, source=$source, location=$location, remote=$remote, companyNumEmployees=$companyNumEmployees, employmentType=$employmentType, orderBy=$orderBy, page=$page")
+
                 val response = jobApiService.getJobs(
                     search = search,
                     source = source,
@@ -90,19 +97,16 @@ class JobViewModel : ViewModel() {
         return Uri.parse(url).getQueryParameter("page")?.toInt()
     }
 
-    // Function to add a job to favorites
     fun addJobToFavorites(job: Results) {
         if (!_favoriteJobs.contains(job)) {
             _favoriteJobs.add(job)
         }
     }
 
-    // Function to remove a job from favorites
     fun removeJobFromFavorites(job: Results) {
         _favoriteJobs.remove(job)
     }
 
-    // Function to check if a job is a favorite
     fun isJobFavorite(job: Results): Boolean {
         return _favoriteJobs.contains(job)
     }

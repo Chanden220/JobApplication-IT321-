@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.compose.AsyncImage
+import com.app.jobappication.screens.JobCategoryScreen
 import com.app.jobappication.screens.JobMainScreen
 import com.app.jobappication.screens.MyScreen
 import com.app.jobappication.ui.theme.JobAppicationTheme
@@ -68,6 +69,10 @@ fun JobApp() {
         composable("jobs") {
             JobMainScreen(vm, navController)
         }
+        composable("bycategory"){
+            JobCategoryScreen( vm, navController )
+        }
+
     }
 }
 

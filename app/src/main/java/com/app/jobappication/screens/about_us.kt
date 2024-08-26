@@ -1,11 +1,10 @@
 package com.app.jobappication.screens
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowForwardIos
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -23,12 +22,13 @@ fun AboutUsScreen(navController: NavController) {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("About Us") },
+                title = { Text("About Us", color = Color.White) },
                 navigationIcon = {
                     IconButton(onClick = { navController.navigateUp() }) {
-                        Icon(Icons.Default.ArrowForwardIos, contentDescription = "Back")
+                        Icon(Icons.Default.ArrowBackIosNew, contentDescription = "Back", tint = Color.White)
                     }
-                }
+                },
+                colors = TopAppBarDefaults.topAppBarColors(containerColor = Color(0xFF022E4D))
             )
         }
     ) { paddingValues ->
@@ -36,19 +36,18 @@ fun AboutUsScreen(navController: NavController) {
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
-                .background(Color(0xFFF1F1F1))
+                .background(Color(0xFF022E4D))
         ) {
             AboutUsContent()
         }
     }
 }
 
-
 @Composable
 fun AboutUsContent() {
     Column(
         modifier = Modifier
-            .fillMaxSize()
+            .height(450.dp)
             .padding(16.dp)
             .background(Color.White, RoundedCornerShape(8.dp))
             .padding(16.dp)
@@ -109,12 +108,7 @@ fun AboutUsContent() {
                 fontSize = 16.sp,
                 color = Color(0xFF022E4D)
             )
-            Icon(
-                imageVector = Icons.Default.ArrowForwardIos,
-                contentDescription = "Learn More",
-                tint = Color(0xFFFFA500),
-                modifier = Modifier.clickable { /* Navigate to more details */ }
-            )
         }
     }
 }
+

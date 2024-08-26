@@ -56,7 +56,7 @@ fun JobAllScreen(vm: JobViewModel = viewModel(), navController: NavController) {
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
-                .background(Color(0xFFF1F1F1))
+                .background(MaterialTheme.colorScheme.surface)
         ){
             JobAllBody(vm, navController)
         }
@@ -69,15 +69,15 @@ fun JobAllScreen(vm: JobViewModel = viewModel(), navController: NavController) {
 fun JobAllBody(vm: JobViewModel, navController: NavController) {
 
     if (vm.isLoading) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     } else if (vm.errorMessage.isNotEmpty()) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface), contentAlignment = Alignment.Center) {
             Text(text = vm.errorMessage, color = Color.Red)
         }
     } else {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
 
             Row(
                 modifier = Modifier
@@ -124,7 +124,8 @@ fun JobAllBody(vm: JobViewModel, navController: NavController) {
 
                         Icon(
                             Icons.Default.Search,
-                            contentDescription = "Search Icon"
+                            contentDescription = "Search Icon",
+                            tint = MaterialTheme.colorScheme.onSurface,
                         )
 
                 }
@@ -137,14 +138,15 @@ fun JobAllBody(vm: JobViewModel, navController: NavController) {
                 verticalAlignment = Alignment.Bottom){
                 Icon(Icons.Default.Work, contentDescription = "All",tint=Color(0xFF022E4D))
                 Text(text = "All",fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp, modifier = Modifier.padding(horizontal = 8.dp))
+                    fontSize = 16.sp, modifier = Modifier.padding(horizontal = 8.dp),
+                color=MaterialTheme.colorScheme.onSurface)
 
             }
             Column(
                 modifier = Modifier.fillMaxSize(),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                for (job in vm.jobs) {
+                for (job in vm.jobs.take(10)) {
                     JobItemGrid(job, navController, vm)
                 }
             }

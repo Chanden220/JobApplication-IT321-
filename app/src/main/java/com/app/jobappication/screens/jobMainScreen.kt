@@ -55,7 +55,7 @@ fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
-                .background(Color(0xFFF1F1F1))
+
         ){
         JobBody(vm, navController)
         }
@@ -67,16 +67,15 @@ fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
 @Composable
 fun JobBody(vm: JobViewModel, navController: NavController) {
       if (vm.isLoading) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     } else if (vm.errorMessage.isNotEmpty()) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface), contentAlignment = Alignment.Center) {
             Text(text = vm.errorMessage, color = Color.Red)
         }
     } else {
-        Column(modifier = Modifier.fillMaxSize()) {
-
+        Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
             AutoScrollingCarousel()
             Row(modifier = Modifier
                 .padding(9.dp)
@@ -85,13 +84,13 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom){
                 Row {
-                    Icon(Icons.Default.Category, contentDescription = "Category")
+                    Icon(Icons.Default.Category, contentDescription = "Category",tint = MaterialTheme.colorScheme.onSurface)
                     Text(
-                        text = "Category", fontWeight = FontWeight.Bold,
+                        text = "Category", fontWeight = FontWeight.Bold,color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 16.sp ,modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }
-                Icon(Icons.Default.ArrowForwardIos, contentDescription = "CategoryAll",modifier = Modifier.clickable { navController.navigate("bycategory") })
+                Icon(Icons.Default.ArrowForwardIos, contentDescription = "CategoryAll",modifier = Modifier.clickable { navController.navigate("bycategory") },tint = MaterialTheme.colorScheme.onSurface)
             }
             Row(modifier = Modifier
                 .padding(9.dp)
@@ -213,10 +212,11 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                     )
                     Text(
                         text = "New", fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp,modifier = Modifier.padding(horizontal = 8.dp)
+                        fontSize = 16.sp,modifier = Modifier.padding(horizontal = 8.dp),
+                        color = MaterialTheme.colorScheme.onSurface,
                     )
                 }
-                Icon(Icons.Default.ArrowForwardIos, contentDescription = "NewwAll")
+                Icon(Icons.Default.ArrowForwardIos, contentDescription = "NewwAll",tint = MaterialTheme.colorScheme.onSurface,modifier = Modifier.clickable { navController.navigate("newJob") })
             }
 
             Column(

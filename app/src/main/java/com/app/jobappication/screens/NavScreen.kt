@@ -175,7 +175,7 @@ fun DrawerContent(navController: NavController) {
             modifier = Modifier
                 .padding(16.dp)
                 .border(1.dp, Color.Gray, shape = RectangleShape)
-                .padding(16.dp)
+                .padding(16.dp).background(MaterialTheme.colorScheme.surface)
         ) {
             Text("Username", style = MaterialTheme.typography.bodySmall)
         }
@@ -183,7 +183,7 @@ fun DrawerContent(navController: NavController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = { navController.navigate("home") },
+            onClick = { navController.navigate("allJob") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp)
@@ -194,6 +194,7 @@ fun DrawerContent(navController: NavController) {
             contentPadding = PaddingValues(0.dp),
             interactionSource = remember { MutableInteractionSource() }
         ) {
+            Text("All Jobs", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start,color = MaterialTheme.colorScheme.onSurface)
 
         }
 
@@ -209,7 +210,7 @@ fun DrawerContent(navController: NavController) {
             contentPadding = PaddingValues(0.dp),
             interactionSource = remember { MutableInteractionSource() }
         ) {
-            Text("Settings", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start)
+            Text("Settings", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start,color = MaterialTheme.colorScheme.onSurface)
         }
 
         Button(
@@ -224,7 +225,7 @@ fun DrawerContent(navController: NavController) {
             contentPadding = PaddingValues(0.dp),
             interactionSource = remember { MutableInteractionSource() }
         ) {
-            Text("Profile", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start)
+            Text("Profile", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start,color = MaterialTheme.colorScheme.onSurface)
         }
     }
 }

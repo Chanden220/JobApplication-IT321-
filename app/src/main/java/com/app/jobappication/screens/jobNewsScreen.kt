@@ -56,7 +56,7 @@ fun JobNewScreen(vm: JobViewModel = viewModel(), navController: NavController) {
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
-                .background(Color(0xFFF1F1F1))
+                .background(MaterialTheme.colorScheme.surface)
         ){
             JobNewBody(vm, navController)
         }
@@ -125,6 +125,7 @@ fun JobNewBody(vm: JobViewModel, navController: NavController) {
                         Icon(
                             Icons.Default.Search,
                             contentDescription = "Search Icon"
+                            ,tint = MaterialTheme.colorScheme.onSurface
                         )
 
                 }
@@ -137,7 +138,8 @@ fun JobNewBody(vm: JobViewModel, navController: NavController) {
                 verticalAlignment = Alignment.Bottom){
                 Icon(Icons.Default.NewReleases, contentDescription = "New",tint=Color.Red)
                 Text(text = "New",fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp, modifier = Modifier.padding(horizontal = 8.dp))
+                    fontSize = 16.sp, modifier = Modifier.padding(horizontal = 8.dp)
+                ,color = MaterialTheme.colorScheme.onSurface)
 
             }
             Column(

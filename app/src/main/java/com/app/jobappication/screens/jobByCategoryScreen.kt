@@ -55,7 +55,7 @@ fun JobCategoryScreen(vm: JobViewModel = viewModel(), navController: NavControll
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
-                .background(Color(0xFFF1F1F1))
+                .background(MaterialTheme.colorScheme.surface)
         ){
             JobCategoryBody(vm, navController)
         }
@@ -74,24 +74,24 @@ fun JobCategoryBody(vm: JobViewModel, navController: NavController) {
     val selectedRemoteType = vm.remote
     val selectedEmployeeType = vm.employeeType
     if (vm.isLoading) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
     } else if (vm.errorMessage.isNotEmpty()) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface), contentAlignment = Alignment.Center) {
             Text(text = vm.errorMessage, color = Color.Red)
         }
     } else {
-        Column(modifier = Modifier.fillMaxSize()) {
+        Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
             Row(modifier = Modifier
                 .padding(9.dp)
                 .fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom){
                 Row {
-                    Icon(Icons.Default.Category, contentDescription = "Category")
+                    Icon(Icons.Default.Category, contentDescription = "Category", tint = MaterialTheme.colorScheme.onSurface)
                     Text(
-                        text = "Category", fontWeight = FontWeight.Bold,
+                        text = "Category", fontWeight = FontWeight.Bold,color = MaterialTheme.colorScheme.onSurface,
                         fontSize = 16.sp
                     )
                 }
@@ -381,7 +381,7 @@ fun JobCategoryBody(vm: JobViewModel, navController: NavController) {
                         .width(80.dp)
                         .height(40.dp)
                 ) {
-                    Text("Filter", fontSize = 13.sp)
+                    Text("Filter", fontSize = 13.sp, color = MaterialTheme.colorScheme.onSurface)
                 }
 
             }

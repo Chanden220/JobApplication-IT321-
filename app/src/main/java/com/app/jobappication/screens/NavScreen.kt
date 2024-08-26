@@ -18,6 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material3.Icon
@@ -115,6 +116,14 @@ fun Nav(content: @Composable (PaddingValues) -> Unit) {
                             tint = Color.White
                         )
                     }
+                    IconButton(onClick = { navController.navigate("aboutUs") }) {
+                        Icon(
+                            Icons.Default.Info,
+                            contentDescription = "About Us",
+                            modifier = Modifier.size(iconSize),
+                            tint = Color.White
+                        )
+                    }
                 }
             )
         },
@@ -179,11 +188,11 @@ fun DrawerContent(navController: NavController) {
                 .fillMaxWidth()
                 .padding(start = 16.dp, end = 16.dp)
                 .background(Color.Transparent)
-                .then(Modifier.shadow(0.dp)), // Removes any shadow
+                .then(Modifier.shadow(0.dp)),
             colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            elevation = ButtonDefaults.buttonElevation(0.dp), // Ensures no elevation
+            elevation = ButtonDefaults.buttonElevation(0.dp),
             contentPadding = PaddingValues(0.dp),
-            interactionSource = remember { MutableInteractionSource() } // Removes ripple effect
+            interactionSource = remember { MutableInteractionSource() }
         ) {
 
         }

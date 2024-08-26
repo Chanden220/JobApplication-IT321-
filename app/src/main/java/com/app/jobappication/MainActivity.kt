@@ -30,6 +30,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import coil.compose.AsyncImage
+import com.app.jobappication.screens.AboutUsScreen
 import com.app.jobappication.screens.JobAllScreen
 import com.app.jobappication.screens.JobCategoryScreen
 import com.app.jobappication.screens.JobMainScreen
@@ -59,6 +60,9 @@ fun JobApp() {
         composable("welcome") {
             WelcomeScreen(navController)
         }
+        composable("aboutUs") {
+            AboutUsScreen(navController)
+        }
         composable(
             "detail/{jobId}",
             arguments = listOf(navArgument("jobId") {
@@ -80,6 +84,7 @@ fun JobApp() {
         composable("allJob") {
             JobAllScreen(vm, navController )
         }
+
     }
 }
 
@@ -157,3 +162,4 @@ fun JobDetailScreen(jobId: String?, navController: NavController) {
         }
     )
 }
+

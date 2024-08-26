@@ -49,7 +49,7 @@ import kotlinx.coroutines.launch
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun JobAllScreen(vm: JobViewModel = viewModel(), navController: NavController) {
-    // Launch the job fetching on component load
+
     LaunchedEffect(Unit) { vm.fetchJobs(search = vm.search, location = vm.locationSearch,employmentType = vm.employeeType) }
     Nav(navController) { paddingValues ->
         Column(
@@ -78,7 +78,6 @@ fun JobAllBody(vm: JobViewModel, navController: NavController) {
         }
     } else {
         Column(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.surface)) {
-
             Row(
                 modifier = Modifier
                     .padding(8.dp)

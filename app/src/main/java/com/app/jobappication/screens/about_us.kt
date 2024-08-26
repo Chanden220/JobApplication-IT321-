@@ -49,7 +49,7 @@ fun AboutUsContent() {
         modifier = Modifier
             .height(450.dp)
             .padding(16.dp)
-            .background(Color.White, RoundedCornerShape(8.dp))
+            .background(MaterialTheme.colorScheme.surface, RoundedCornerShape(8.dp))
             .padding(16.dp)
     ) {
         Row(
@@ -76,7 +76,7 @@ fun AboutUsContent() {
         Text(
             text = "Welcome to Job Application, your number one source for finding jobs. We're dedicated to providing you the best job search experience, with a focus on full-time, part-time, and remote opportunities.",
             fontSize = 16.sp,
-            color = Color.Gray
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -84,7 +84,7 @@ fun AboutUsContent() {
         Text(
             text = "Our mission is to connect job seekers with the best opportunities that fit their needs, whether it's in the office or from the comfort of their home.",
             fontSize = 16.sp,
-            color = Color.Gray
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -92,7 +92,7 @@ fun AboutUsContent() {
         Text(
             text = "Founded in 2024, Job Application has come a long way from its beginnings. We now serve users all over the world, and are thrilled to be a part of this industry.",
             fontSize = 16.sp,
-            color = Color.Gray
+            color = MaterialTheme.colorScheme.onSurface
         )
 
         Spacer(modifier = Modifier.height(16.dp))

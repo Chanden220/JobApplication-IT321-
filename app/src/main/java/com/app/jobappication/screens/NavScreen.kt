@@ -133,8 +133,10 @@ fun Nav(navController: NavController,content: @Composable (PaddingValues) -> Uni
     ) { innerPadding ->
         Column(
             modifier = Modifier
+                .fillMaxSize()
                 .padding(innerPadding)
                 .verticalScroll(scrollState)
+                .background(MaterialTheme.colorScheme.surface)
         ) {
             content(innerPadding)
         }

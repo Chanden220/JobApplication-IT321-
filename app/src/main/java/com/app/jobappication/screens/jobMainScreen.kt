@@ -55,7 +55,6 @@ fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize()
-
         ){
         JobBody(vm, navController)
         }

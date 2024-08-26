@@ -14,6 +14,7 @@ import androidx.compose.material.icons.filled.Category
 import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.NewReleases
 import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material.icons.filled.Wifi
 import androidx.compose.material.icons.filled.Work
@@ -31,12 +32,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.AsyncImage
 import com.app.jobappication.model.Results
 import com.app.jobappication.viewmodel.JobViewModel
 import kotlinx.coroutines.delay
@@ -63,9 +66,7 @@ fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) 
 
 @Composable
 fun JobBody(vm: JobViewModel, navController: NavController) {
-    var expandedCategory: Boolean by remember { mutableStateOf(false) }
-    var expandedLoactionSearch: Boolean by remember { mutableStateOf(false) }
-    if (vm.isLoading) {
+      if (vm.isLoading) {
         Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
             CircularProgressIndicator()
         }
@@ -75,18 +76,19 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
         }
     } else {
         Column(modifier = Modifier.fillMaxSize()) {
-            // Carousel Section using LazyRow with auto-scrolling
-            AutoScrollingCarousel(jobs = vm.jobs)
+
+            AutoScrollingCarousel()
             Row(modifier = Modifier
                 .padding(9.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { navController.navigate("bycategory") },
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom){
                 Row {
                     Icon(Icons.Default.Category, contentDescription = "Category")
                     Text(
                         text = "Category", fontWeight = FontWeight.Bold,
-                        fontSize = 16.sp
+                        fontSize = 16.sp ,modifier = Modifier.padding(horizontal = 8.dp)
                     )
                 }
                 Icon(Icons.Default.ArrowForwardIos, contentDescription = "CategoryAll",modifier = Modifier.clickable { navController.navigate("bycategory") })
@@ -105,11 +107,12 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
-
+                        .clickable { navController.navigate("bycategory") }
                 ) {
                     Row(
                         modifier = Modifier.padding(8.dp),
-                        verticalAlignment = Alignment.Bottom,
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                     ) {
                         Icon(
                             Icons.Default.LocationOn,
@@ -134,11 +137,13 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
+                        .clickable { navController.navigate("bycategory") }
 
                 ) {
                     Row(
                         modifier = Modifier.padding(8.dp),
-                        verticalAlignment = Alignment.Bottom,
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                     ) {
                         Icon(
                             Icons.Default.Work,
@@ -169,11 +174,13 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
                             shape = RoundedCornerShape(8.dp)
                         )
                         .padding(8.dp)
+                        .clickable { navController.navigate("bycategory") }
 
                 ) {
                     Row(
                         modifier = Modifier.padding(8.dp),
-                        verticalAlignment = Alignment.Bottom,
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                     ) {
                         Icon(
                             Icons.Default.Wifi,
@@ -194,39 +201,62 @@ fun JobBody(vm: JobViewModel, navController: NavController) {
 
             Row(modifier = Modifier
                 .padding(9.dp)
-                .fillMaxWidth(),
+                .fillMaxWidth()
+                .clickable { navController.navigate("newJob") },
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.Bottom){
-                Text(text = "New",fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp)
+                Row {
+                    Icon(
+                        Icons.Default.NewReleases,
+                        contentDescription = "New",
+                        tint = Color.Red
+                    )
+                    Text(
+                        text = "New", fontWeight = FontWeight.Bold,
+                        fontSize = 16.sp,modifier = Modifier.padding(horizontal = 8.dp)
+                    )
+                }
                 Icon(Icons.Default.ArrowForwardIos, contentDescription = "NewwAll")
             }
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(vm.jobs.take(10)) { job ->
-                    JobItemGrid(job, navController,vm)
+
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+            for (job in vm.jobs.take(10)) {
+                    JobItemGrid(job, navController, vm)
                 }
             }
+
         }
     }
 }
 
 @Composable
-fun AutoScrollingCarousel(jobs: List<Results>) {
+fun AutoScrollingCarousel() {
     val carouselState = rememberLazyListState()
     val coroutineScope = rememberCoroutineScope()
+    val imageUrls = listOf(
+        "https://cdn.vectorstock.com/i/1000x1000/59/22/work-at-home-banner-business-workspace-workplace-vector-25945922.webp",
+        "https://media.istockphoto.com/id/1355871299/vector/great-job-promotion-work-appreciation-banner-megaphone-great-job-recruiting-sign-employee.jpg?s=612x612&w=0&k=20&c=6isXlDWmRNHf6-LE_A4agOwZ5CM6z7v9PaIiMjVJVsQ="
+    )
 
-    // Auto-scrolling logic with looping
+    val infiniteImageUrls = listOf(imageUrls.last()) + imageUrls + listOf(imageUrls.first())
+
     LaunchedEffect(key1 = carouselState) {
         coroutineScope.launch {
+            // Ensure the carousel starts in the middle to avoid showing extra items
+            carouselState.scrollToItem(1)
+
             while (true) {
                 delay(3000)
-                val nextIndex = (carouselState.firstVisibleItemIndex + 1) % jobs.size
-                if (nextIndex == 0 && carouselState.firstVisibleItemIndex == jobs.lastIndex) {
-
-                    carouselState.scrollToItem(0)
+                val currentIndex = carouselState.firstVisibleItemIndex
+                val nextIndex = if (currentIndex == infiniteImageUrls.size - 1) {
+                    1 // Skip to the first item in the middle
                 } else {
-                    carouselState.animateScrollToItem(index = nextIndex)
+                    currentIndex + 1
                 }
+                carouselState.animateScrollToItem(nextIndex)
             }
         }
     }
@@ -237,14 +267,14 @@ fun AutoScrollingCarousel(jobs: List<Results>) {
             .fillMaxWidth()
             .padding(16.dp)
     ) {
-        items(jobs.take(5)) { job ->
-            CarouselItem(job = job)
+        items(infiniteImageUrls.size) { index ->
+            CarouselItem(url = infiniteImageUrls[index])
         }
     }
 }
 
 @Composable
-fun CarouselItem(job: Results) {
+fun CarouselItem(url: String) {
     Box(
         modifier = Modifier
             .width(350.dp)
@@ -252,13 +282,19 @@ fun CarouselItem(job: Results) {
             .padding(8.dp)
             .background(Color.LightGray, shape = RoundedCornerShape(8.dp))
     ) {
-        Text(text = job.role ?: "Unknown Role", modifier = Modifier.align(Alignment.Center))
+        AsyncImage(
+            model = url,
+            contentDescription = "Image",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }
 
+
 @Composable
 fun JobItemGrid(job: Results, navController: NavController, jobViewModel: JobViewModel) {
-    // Determine if the job is a favorite
+
     val isFavorite = jobViewModel.isJobFavorite(job)
 
     Surface(
@@ -270,8 +306,7 @@ fun JobItemGrid(job: Results, navController: NavController, jobViewModel: JobVie
                     navController.navigate("detail/$id")
                 }
             },
-        shape = RoundedCornerShape(8.dp),
-        color = Color.White
+
     ) {
         Row(
             modifier = Modifier
@@ -355,26 +390,23 @@ fun JobItemGrid(job: Results, navController: NavController, jobViewModel: JobVie
                                 .height(30.dp)
                         ) {
                             Text("Apply", fontSize = 10.sp)
-                        }
-                        IconButton(
-                            onClick = {
-                                if (isFavorite) {
-                                    jobViewModel.removeJobFromFavorites(job)
-                                } else {
-                                    jobViewModel.addJobToFavorites(job)
-                                }
-                            },
+                      }
+                        Icon(
+                            imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
+                            contentDescription = "Favorite",
                             modifier = Modifier
-                                .padding(vertical = 8.dp)
-                                .align(Alignment.Bottom)
-                        ) {
-                            Icon(
-                                imageVector = if (isFavorite) Icons.Filled.Favorite else Icons.Outlined.FavoriteBorder,
-                                contentDescription = "Favorite",
-                                modifier = Modifier.size(24.dp),
-                                tint = Color.Red
-                            )
-                        }
+                                .padding(horizontal = 4.dp)
+                                .size(24.dp)
+                                .clickable {
+                                    if (isFavorite) {
+                                        jobViewModel.removeJobFromFavorites(job)
+                                    } else {
+                                        jobViewModel.addJobToFavorites(job)
+                                    }
+                                },
+                            tint = Color.Red
+                        )
+
                     }
                 }
                 Spacer(modifier = Modifier.height(10.dp))

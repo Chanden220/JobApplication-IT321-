@@ -116,7 +116,8 @@ fun JobCategoryBody(vm: JobViewModel, navController: NavController) {
                 ) {
                     Row(
                         modifier = Modifier.padding(8.dp),
-                                verticalAlignment = Alignment.Bottom,
+                                verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                     ) {
                         Icon(
                             Icons.Default.LocationOn,
@@ -147,7 +148,8 @@ fun JobCategoryBody(vm: JobViewModel, navController: NavController) {
                 ) {
                     Row(
                         modifier = Modifier.padding(8.dp),
-                        verticalAlignment = Alignment.Bottom,
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                     ) {
                         Icon(
                             Icons.Default.Work,
@@ -184,7 +186,8 @@ fun JobCategoryBody(vm: JobViewModel, navController: NavController) {
                 ) {
                     Row(
                         modifier = Modifier.padding(8.dp),
-                        verticalAlignment = Alignment.Bottom,
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center,
                     ) {
                         Icon(
                             Icons.Default.Wifi,
@@ -383,10 +386,12 @@ fun JobCategoryBody(vm: JobViewModel, navController: NavController) {
 
             }
 
-
-            LazyColumn(modifier = Modifier.fillMaxSize()) {
-                items(vm.jobs.take(10)) { job ->
-                    JobItemGrid(job, navController,vm)
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
+                for (job in vm.jobs.take(10)) {
+                    JobItemGrid(job, navController, vm)
                 }
             }
         }

@@ -35,7 +35,7 @@ import com.app.jobappication.screens.JobAllScreen
 import com.app.jobappication.screens.JobCategoryScreen
 import com.app.jobappication.screens.JobMainScreen
 import com.app.jobappication.screens.JobNewScreen
-import com.app.jobappication.screens.MyScreen
+
 import com.app.jobappication.ui.theme.JobAppicationTheme
 import com.app.jobappication.viewmodel.JobViewModel
 
@@ -45,7 +45,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             JobAppicationTheme {
                JobApp()
-                //MyScreen()
+
             }
         }
     }
@@ -83,6 +83,9 @@ fun JobApp() {
         }
         composable("allJob") {
             JobAllScreen(vm, navController )
+        }
+        composable("aboutUs") {
+            AboutUsScreen(navController )
         }
 
     }

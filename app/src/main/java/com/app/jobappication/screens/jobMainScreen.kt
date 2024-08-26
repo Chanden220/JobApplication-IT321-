@@ -50,7 +50,7 @@ import kotlinx.coroutines.launch
 fun JobMainScreen(vm: JobViewModel = viewModel(), navController: NavController) {
     // Launch the job fetching on component load
     LaunchedEffect(Unit) { vm.fetchJobs() }
-    Nav { paddingValues ->
+    Nav(navController) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)

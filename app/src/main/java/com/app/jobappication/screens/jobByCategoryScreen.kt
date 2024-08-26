@@ -50,7 +50,7 @@ import kotlinx.coroutines.launch
 fun JobCategoryScreen(vm: JobViewModel = viewModel(), navController: NavController) {
     // Launch the job fetching on component load
     LaunchedEffect(Unit) { vm.fetchJobs(search = vm.search, location = vm.locationSearch,employmentType = vm.employeeType) }
-    Nav { paddingValues ->
+    Nav(navController) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)

@@ -60,9 +60,6 @@ fun JobApp() {
         composable("welcome") {
             WelcomeScreen(navController)
         }
-        composable("aboutUs") {
-            AboutUsScreen(navController)
-        }
         composable(
             "detail/{jobId}",
             arguments = listOf(navArgument("jobId") {

@@ -7,14 +7,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.rememberAsyncImagePainter
 import com.app.jobappication.model.ApiResponse
 import com.app.jobappication.model.User
@@ -24,6 +29,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.app.jobappication.util.TextField
+import com.app.jobappication.viewmodel.JobViewModel
 
 @Composable
 fun ProfileScreen(userId: Int) {
@@ -97,13 +103,11 @@ fun ProfileContent(user: User) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Full Width Field: ID
         TextField(
             value = "${user.id.name} ${user.id.value}",
             modifier = Modifier.fillMaxWidth()
         )
 
-        // Half Width Fields: Date of Birth and Registered Date
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -118,7 +122,6 @@ fun ProfileContent(user: User) {
             )
         }
 
-        // Half Width Fields: Phone and Cell
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -140,13 +143,13 @@ fun ProfileContent(user: User) {
 
         Spacer(modifier = Modifier.height(16.dp))
         IconButtonWithText(
-            icon = Icons.AutoMirrored.Filled.ArrowForward,
-            text = "Apply",
+            icon = Icons.AutoMirrored.Filled.ArrowBack,
+            text = "Back",
             onClick = { /* Handle button click */ }
         )
     }
 }
 
 fun formatDate(dateString: String): String {
-    return dateString.substring(0, 10) // Example: Extracts 'YYYY-MM-DD'
+    return dateString.substring(0, 10)
 }

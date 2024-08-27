@@ -13,11 +13,9 @@ import java.io.IOException
 
 class JobViewModel : ViewModel() {
 
-    // Use MutableStateFlow to manage state
     private val _jobs = mutableStateListOf<Results>()
     val jobs: List<Results> = _jobs
 
-    // List to store favorite jobs
     private val _favoriteJobs = mutableStateListOf<Results>()
     val favoriteJobs: List<Results> = _favoriteJobs
 

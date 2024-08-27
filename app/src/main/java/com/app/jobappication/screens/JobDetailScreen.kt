@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowForward
 import androidx.compose.material.icons.automirrored.filled.Launch
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -50,7 +52,6 @@ fun DetailScreen(imageUrl: String, title: String, date: String,
                 .aspectRatio(1f)
         )
 
-        Spacer(modifier = Modifier.height(16.dp))
         Text(
             text = title,
             fontWeight = FontWeight.Bold,
@@ -181,13 +182,13 @@ fun DetailScreen(imageUrl: String, title: String, date: String,
                 .wrapContentSize()
         ) {
             RoundIconButton(
-                icon = Icons.AutoMirrored.Filled.Launch,
+                icon = Icons.Outlined.Favorite,
                 onClick = { /* Handle button click */ }
             )
 
             IconButtonWithText(
                 icon = Icons.AutoMirrored.Filled.ArrowForward,
-                text = "Continue",
+                text = "Apply",
                 onClick = { /* Handle button click */ }
             )
         }

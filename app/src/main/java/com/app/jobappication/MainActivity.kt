@@ -33,6 +33,7 @@ import coil.compose.AsyncImage
 import com.app.jobappication.screens.AboutUsScreen
 import com.app.jobappication.screens.JobAllScreen
 import com.app.jobappication.screens.JobCategoryScreen
+import com.app.jobappication.screens.JobFavScreen
 import com.app.jobappication.screens.JobMainScreen
 import com.app.jobappication.screens.JobNewScreen
 import com.app.jobappication.screens.ProfileScreen
@@ -86,6 +87,9 @@ fun JobApp() {
         }
         composable("profile") {
             ProfileScreen(2 )
+        }
+        composable("favorite"){
+            JobFavScreen(vm,navController)
         }
 
     }

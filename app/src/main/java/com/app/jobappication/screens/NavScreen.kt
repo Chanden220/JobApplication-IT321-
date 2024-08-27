@@ -199,6 +199,21 @@ fun DrawerContent(navController: NavController) {
             Text("All Jobs", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start,color = MaterialTheme.colorScheme.onSurface)
 
         }
+        Button(
+            onClick = { navController.navigate("favorite") },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 16.dp, end = 16.dp)
+                .background(Color.Transparent)
+                .then(Modifier.shadow(0.dp)),
+            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+            elevation = ButtonDefaults.buttonElevation(0.dp),
+            contentPadding = PaddingValues(0.dp),
+            interactionSource = remember { MutableInteractionSource() }
+        ) {
+            Text("Favorites", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start,color = MaterialTheme.colorScheme.onSurface)
+
+        }
 
         Button(
             onClick = { navController.navigate("settings") },

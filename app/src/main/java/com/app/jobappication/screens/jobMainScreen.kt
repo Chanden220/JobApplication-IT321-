@@ -301,9 +301,9 @@ fun JobItemGrid(job: Results, navController: NavController, jobViewModel: JobVie
             .padding(1.dp)
             .fillMaxWidth()
             .clickable {
-                job.id?.let { id ->
-                    navController.navigate("detail/$id")
-                }
+                jobViewModel.selectedJob = job
+                    navController.navigate("detail")
+
             },
 
     ) {
@@ -379,7 +379,10 @@ fun JobItemGrid(job: Results, navController: NavController, jobViewModel: JobVie
                     }
                     Row(verticalAlignment = Alignment.Bottom) {
                         Button(
-                            onClick = { navController.navigate("detail/${job.id}") },
+                            onClick = {
+                                jobViewModel.selectedJob = job
+                                navController.navigate("detail")
+                                      },
                             colors = ButtonDefaults.buttonColors(
                                 containerColor = Color(0xFFFFA500) // Dark orange color
                             ),

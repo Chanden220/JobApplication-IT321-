@@ -136,7 +136,7 @@ fun Nav(navController: NavController,content: @Composable (PaddingValues) -> Uni
                 .fillMaxSize()
                 .padding(innerPadding)
                 .verticalScroll(scrollState)
-                .background(Color(0xFFF1F1F1))
+                .background(MaterialTheme.colorScheme.surface)
         ) {
             content(innerPadding)
         }
@@ -172,105 +172,136 @@ fun CustomTopAppBar(
 
 @Composable
 fun DrawerContent(navController: NavController) {
-    Column {
-        Spacer(modifier = Modifier.height(40.dp))
-
-        Text(
-            text = "Job Seeker",
-            modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp),
-            textAlign = TextAlign.Start,
-            fontWeight = FontWeight.Bold,
-            fontSize = 25.sp,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-        Text(
-            text = "Catch your chance here, don't miss it!",
-            modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp),
-            textAlign = TextAlign.Start,
-            fontSize = 13.sp,
-            color = MaterialTheme.colorScheme.onSurface
-        )
-        Spacer(modifier = Modifier.height(40.dp))
-
-        Divider(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(vertical = 8.dp),
-            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
-        Button(
-            onClick = { navController.navigate("allJob") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
-                .background(Color.Transparent)
-                .then(Modifier.shadow(0.dp)),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            elevation = ButtonDefaults.buttonElevation(0.dp),
-            contentPadding = PaddingValues(0.dp),
-            interactionSource = remember { MutableInteractionSource() }
-        ) {
-            Text("All Jobs", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start, color = MaterialTheme.colorScheme.onSurface)
-        }
-
-        Button(
-            onClick = { navController.navigate("favorite") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
-                .background(Color.Transparent)
-                .then(Modifier.shadow(0.dp)),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            elevation = ButtonDefaults.buttonElevation(0.dp),
-            contentPadding = PaddingValues(0.dp),
-            interactionSource = remember { MutableInteractionSource() }
-        ) {
-            Text("Favorites", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start, color = MaterialTheme.colorScheme.onSurface)
-        }
-
-        Button(
-            onClick = { navController.navigate("profile") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
-                .background(Color.Transparent)
-                .then(Modifier.shadow(0.dp)),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            elevation = ButtonDefaults.buttonElevation(0.dp),
-            contentPadding = PaddingValues(0.dp),
-            interactionSource = remember { MutableInteractionSource() }
-        ) {
-            Text("Profile", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start, color = MaterialTheme.colorScheme.onSurface)
-        }
-
-        Button(
-            onClick = { navController.navigate("aboutUs") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(start = 16.dp, end = 16.dp)
-                .background(Color.Transparent)
-                .then(Modifier.shadow(0.dp)),
-            colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
-            elevation = ButtonDefaults.buttonElevation(0.dp),
-            contentPadding = PaddingValues(0.dp),
-            interactionSource = remember { MutableInteractionSource() }
-        ) {
-            Text("About Us", modifier = Modifier.fillMaxWidth(), textAlign = TextAlign.Start, color = MaterialTheme.colorScheme.onSurface)
-        }
-    }
-
     Column(
-        modifier = Modifier.padding(16.dp) // Adding padding around the version text
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.surface)
     ) {
-        Text(
-            text = "Version: 1.0.0",
-            modifier = Modifier.fillMaxWidth(),
-            textAlign = TextAlign.Center,
-            fontSize = 12.sp,
-            color = MaterialTheme.colorScheme.onSurface
-        )
+        Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
+            Spacer(modifier = Modifier.height(40.dp))
+            Text(
+                text = "Job Seeker",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                textAlign = TextAlign.Start,
+                fontWeight = FontWeight.Bold,
+                fontSize = 25.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Text(
+                text = "Catch your chance here, don't miss it!",
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp),
+                textAlign = TextAlign.Start,
+                fontSize = 13.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+            Spacer(modifier = Modifier.height(40.dp))
+
+            Divider(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 8.dp),
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+            Button(
+                onClick = { navController.navigate("allJob") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp)
+                    .background(Color.Transparent)
+                    .then(Modifier.shadow(0.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                elevation = ButtonDefaults.buttonElevation(0.dp),
+                contentPadding = PaddingValues(0.dp),
+                interactionSource = remember { MutableInteractionSource() }
+            ) {
+                Text(
+                    "All Jobs",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Start,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            Button(
+                onClick = { navController.navigate("favorite") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp)
+                    .background(Color.Transparent)
+                    .then(Modifier.shadow(0.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                elevation = ButtonDefaults.buttonElevation(0.dp),
+                contentPadding = PaddingValues(0.dp),
+                interactionSource = remember { MutableInteractionSource() }
+            ) {
+                Text(
+                    "Favorites",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Start,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            Button(
+                onClick = { navController.navigate("profile") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp)
+                    .background(Color.Transparent)
+                    .then(Modifier.shadow(0.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                elevation = ButtonDefaults.buttonElevation(0.dp),
+                contentPadding = PaddingValues(0.dp),
+                interactionSource = remember { MutableInteractionSource() }
+            ) {
+                Text(
+                    "Profile",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Start,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+
+            Button(
+                onClick = { navController.navigate("aboutUs") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp)
+                    .background(Color.Transparent)
+                    .then(Modifier.shadow(0.dp)),
+                colors = ButtonDefaults.buttonColors(containerColor = Color.Transparent),
+                elevation = ButtonDefaults.buttonElevation(0.dp),
+                contentPadding = PaddingValues(0.dp),
+                interactionSource = remember { MutableInteractionSource() }
+            ) {
+                Text(
+                    "About Us",
+                    modifier = Modifier.fillMaxWidth(),
+                    textAlign = TextAlign.Start,
+                    color = MaterialTheme.colorScheme.onSurface
+                )
+            }
+        }
+
+        Column(
+            modifier = Modifier
+                .padding(16.dp)
+                .background(MaterialTheme.colorScheme.surface) // Adding padding around the version text
+        ) {
+            Text(
+                text = "Version: 1.0.0",
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                fontSize = 12.sp,
+                color = MaterialTheme.colorScheme.onSurface
+            )
+        }
     }
 }
 

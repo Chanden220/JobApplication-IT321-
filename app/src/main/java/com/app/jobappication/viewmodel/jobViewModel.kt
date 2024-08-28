@@ -18,7 +18,7 @@ class JobViewModel : ViewModel() {
 
     private val _favoriteJobs = mutableStateListOf<Results>()
     val favoriteJobs: List<Results> = _favoriteJobs
-
+    var selectedJob: Results by mutableStateOf(Results())
     var nextPageUrl: String? by mutableStateOf("")
 
     var prevPageUrl: String? by mutableStateOf("")

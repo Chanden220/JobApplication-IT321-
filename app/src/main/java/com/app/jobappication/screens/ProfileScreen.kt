@@ -32,7 +32,7 @@ import com.app.jobappication.util.TextField
 import com.app.jobappication.viewmodel.JobViewModel
 
 @Composable
-fun ProfileScreen(userId: Int) {
+fun ProfileScreen(userId: Int,navController: NavController) {
     var user by remember { mutableStateOf<User?>(null) }
     var isLoading by remember { mutableStateOf(true) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
@@ -73,14 +73,14 @@ fun ProfileScreen(userId: Int) {
                 )
             }
             user != null -> {
-                ProfileContent(user = user!!)
+                ProfileContent(user = user!!,navController)
             }
         }
     }
 }
 
 @Composable
-fun ProfileContent(user: User) {
+fun ProfileContent(user: User,navController: NavController) {
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
@@ -145,7 +145,10 @@ fun ProfileContent(user: User) {
         IconButtonWithText(
             icon = Icons.AutoMirrored.Filled.ArrowBack,
             text = "Back",
-            onClick = { /* Handle button click */ }
+            onClick = {
+
+                navController.navigate("jobs")
+            }
         )
     }
 }

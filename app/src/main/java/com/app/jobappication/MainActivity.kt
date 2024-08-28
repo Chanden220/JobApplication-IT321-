@@ -61,18 +61,13 @@ fun JobApp() {
     val navController = rememberNavController()
     val vm: JobViewModel = viewModel()
 
-    NavHost(navController = navController, startDestination = "jobs") {
+    NavHost(navController = navController, startDestination = "welcome") {
         composable("welcome") {
             WelcomeScreen(navController)
         }
-        composable(
-            "detail/{jobId}",
-            arguments = listOf(navArgument("jobId") {
-                type = NavType.StringType
-            })
-        ) { backStackEntry ->
-            val jobId = backStackEntry.arguments?.getString("jobId") ?: return@composable
-            JobDetailScreen(jobId = jobId, navController = navController)
+        composable("detail")
+        {
+            DetailScreen(vm,navController)
         }
         composable("jobs") {
             JobMainScreen(vm, navController)
@@ -90,7 +85,7 @@ fun JobApp() {
             AboutUsScreen(navController )
         }
         composable("profile") {
-            ProfileScreen(2 )
+            ProfileScreen(2,navController )
         }
         composable("favorite"){
             JobFavScreen(vm,navController)
@@ -158,32 +153,32 @@ fun WelcomeScreen(navController: NavController) {
     )
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Composable
-fun JobDetailScreen(jobId: String?, vm: JobViewModel = viewModel(), navController: NavController) {
-    LaunchedEffect(Unit) { vm.fetchJobs(search = vm.search, location = vm.locationSearch,employmentType = vm.employeeType) }
-    Nav(navController) { paddingValues ->
-        Column(
-            modifier = Modifier
-                .padding(paddingValues)
-                .fillMaxSize()
-                .background(MaterialTheme.colorScheme.surface)
-        ) {
-            DetailScreen(
-                imageUrl = "https://c4.wallpaperflare.com/wallpaper/685/180/1019/work-is-worship-wallpaper-preview.jpg",
-                title = "UX/UI Developer",
-                date = "ABC Company | August 24, 2024",
-                description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.",
-                responsible = "he point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters\n" +
-                        "Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now ",
-                requirement = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.\n" +
-                        "he point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters",
-                location = "ABC Company | Head Office",
-                deadline = "30 August, 2024",
-                contact = "Tel: (+855) 96 325 8741\n" +
-                        "Email: abccompany@example.com"
-            )
-        }
-    }
-}
+//@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
+//@Composable
+//fun JobDetailScreen(vm: JobViewModel = viewModel(), navController: NavController) {
+//
+//    Nav(navController) { paddingValues ->
+//        Column(
+//            modifier = Modifier
+//                .padding(paddingValues)
+//                .fillMaxSize()
+//                .background(MaterialTheme.colorScheme.surface)
+//        ) {
+//            DetailScreen(
+//                imageUrl = "https://c4.wallpaperflare.com/wallpaper/685/180/1019/work-is-worship-wallpaper-preview.jpg",
+//                title = "UX/UI Developer",
+//                date = "ABC Company | August 24, 2024",
+//                description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it.",
+//                responsible = "he point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters\n" +
+//                        "Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now ",
+//                requirement = "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout.\n" +
+//                        "he point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters",
+//                location = "ABC Company | Head Office",
+//                deadline = "30 August, 2024",
+//                contact = "Tel: (+855) 96 325 8741\n" +
+//                        "Email: abccompany@example.com"
+//            )
+//        }
+//    }
+//}
 

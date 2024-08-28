@@ -107,7 +107,7 @@ fun Nav(navController: NavController,content: @Composable (PaddingValues) -> Uni
                 },
                 actions = {
                     val iconSize = with(LocalDensity.current) { 30.sp.toDp() }
-                    IconButton(onClick = { /* TODO: Handle notification click */ }) {
+                    IconButton(onClick = { /*  */ }) {
                         Icon(
                             Icons.Default.Notifications,
                             contentDescription = "Notifications",
@@ -177,33 +177,33 @@ fun DrawerContent(navController: NavController) {
             .fillMaxSize()
             .background(MaterialTheme.colorScheme.surface)
     ) {
-        Column(modifier = Modifier.background(MaterialTheme.colorScheme.surface)) {
-            Spacer(modifier = Modifier.height(40.dp))
-            Text(
-                text = "Job Seeker",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                textAlign = TextAlign.Start,
-                fontWeight = FontWeight.Bold,
-                fontSize = 25.sp,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Text(
-                text = "Catch your chance here, don't miss it!",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, end = 16.dp),
-                textAlign = TextAlign.Start,
-                fontSize = 13.sp,
-                color = MaterialTheme.colorScheme.onSurface
-            )
-            Spacer(modifier = Modifier.height(40.dp))
+        Column(modifier = Modifier.background(Color.White)) {
+            Column(modifier = Modifier.background(Color(0xFF022E4D))) {
+                Spacer(modifier = Modifier.height(60.dp))
+                Text(
+                    text = "Job Seeker",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp),
+                    textAlign = TextAlign.Start,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 25.sp,
+                    color = Color.White
+                )
+                Text(
+                    text = "Catch your chance here, don't miss it!",
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(start = 16.dp, end = 16.dp),
+                    textAlign = TextAlign.Start,
+                    fontSize = 13.sp,
+                    color = Color.White
+                )
+                Spacer(modifier = Modifier.height(60.dp))
+            }
 
             Divider(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(vertical = 8.dp),
+                modifier = Modifier.fillMaxWidth(),
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
             )
 

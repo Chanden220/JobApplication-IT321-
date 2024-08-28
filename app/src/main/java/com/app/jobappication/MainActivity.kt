@@ -8,9 +8,26 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowForward
+import androidx.compose.material.icons.filled.ArrowForward
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.outlined.FavoriteBorder
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -22,6 +39,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -43,6 +61,7 @@ import com.app.jobappication.screens.Nav
 import com.app.jobappication.screens.ProfileScreen
 
 import com.app.jobappication.ui.theme.JobAppicationTheme
+import com.app.jobappication.util.RoundIconButton
 import com.app.jobappication.viewmodel.JobViewModel
 
 class MainActivity : ComponentActivity() {
@@ -109,18 +128,17 @@ fun WelcomeScreen(navController: NavController) {
                     .background(
                         brush = Brush.verticalGradient(
                             colorStops = arrayOf(
-                                0.0f to Color(0xFF86CDFF).copy(alpha = 0.1f), // 0%
-                                0.06f to Color(0xFF7EC3F4).copy(alpha = 0.1f), // 6%
-                                0.13f to Color(0xFF75B8E9).copy(alpha = 0.4f), // 13%
-                                0.25f to Color(0xFF64A4D2).copy(alpha = 0.4f), // 25%
-                                0.5f to Color(0xFF437CA5).copy(alpha = 0.8f),  // 50%
-                                1.0f to Color(0xFF002C4C).copy(alpha = 1f)   // 100%
+                                0.0f to Color(0xFF86CDFF).copy(alpha = 0.1f),
+                                0.03f to Color(0xFF7EC3F4).copy(alpha = 0.1f),
+                                0.10f to Color(0xFF75B8E9).copy(alpha = 0.4f),
+                                0.25f to Color(0xFF64A4D2).copy(alpha = 0.4f),
+                                0.6f to Color(0xFF437CA5).copy(alpha = 0.8f),
+                                1.0f to Color(0xFF002C4C).copy(alpha = 1f)
                             )
                         )
                     )
             )
             {
-
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.SpaceEvenly,
@@ -130,21 +148,48 @@ fun WelcomeScreen(navController: NavController) {
                         Text(
                             text = "Job Finder",
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            color = Color(0xFF022E4D), // Correct color setup
+                            color = Color.White,
                             fontSize = 50.sp,
                             fontWeight = FontWeight.Bold
                         )
                         Text(
                             text = "Caught Your Chance!",
-                            modifier = Modifier.padding(start = 110.dp,top=55.dp),
-                            color = Color(0xFF022E4D), // Correct color setup
-                            fontSize = 16.sp
+                            modifier = Modifier.padding(start = 85.dp,top=60.dp),
+                            color = Color.White,
+                            fontSize = 18.sp
                         )
                     }
 
-
-                    Button(modifier = Modifier.padding(top=180.dp),onClick = { navController.navigate("jobs") }) {
-                        Text("Explore >>")
+                    Button(
+                        onClick = { navController.navigate("jobs") },
+                        colors = ButtonDefaults.buttonColors(
+                            containerColor = Color(0xFF022E4D),
+                            contentColor = Color.White
+                        ),
+                        shape = RoundedCornerShape(50),
+                        modifier = Modifier
+                            .wrapContentWidth()
+                            .height(56.dp),
+                        contentPadding = PaddingValues(0.dp)
+                    ) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.Center,
+                            modifier = Modifier.padding(horizontal = 30.dp)
+                        ) {
+                            Text(
+                                text = "Explore ",
+                                color = Color.White,
+                                fontSize = 16.sp,
+                                textAlign = TextAlign.Center
+                            )
+                            Spacer(modifier = Modifier.width(5.dp))
+                            Icon(
+                                imageVector = Icons.Filled.ArrowForward,
+                                contentDescription = "",
+                                tint = Color.White
+                            )
+                        }
                     }
                 }
             }
